@@ -52,17 +52,16 @@ class _CameraAppState extends State<CameraApp> {
     setState(() {});
   }
 
-
-void navigateToModelPage(BuildContext context, XFile image) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => Model(
-        imgPath: image.path,
+  void navigateToModelPage(BuildContext context, XFile image) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => Model(
+          imgPath: image.path,
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,14 +77,14 @@ void navigateToModelPage(BuildContext context, XFile image) {
           SizedBox(
             height: 80,
             width: 80,
-            child:
-            FloatingActionButton(
+            child: FloatingActionButton(
               child: Icon(Icons.camera, size: 36),
               onPressed: () async {
                 try {
                   // Take a picture and save it to the gallery.
                   final image = await _controller.takePicture();
                   print('Image saved to gallery: ${image.path}');
+                  navigateToModelPage(context, image);
                 } catch (e) {
                   print('Error taking picture: $e');
                 }

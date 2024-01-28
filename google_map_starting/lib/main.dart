@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_campus_map/location_tracking.dart';
 import 'package:green_campus_map/camera.dart';
 import 'package:camera/camera.dart';
+import 'package:green_campus_map/screens/geojson.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: CameraApp(camera: camera),
+    //  home: const OrderTrackingPage(),
+       home: CameraApp(camera: camera),
     );
   }
 }
