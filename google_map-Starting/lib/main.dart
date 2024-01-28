@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:green_campus_map/location_tracking.dart';
-import 'package:green_campus_map/screens/trash.dart';
+import 'package:green_campus_map/camera.dart';
+import 'package:camera/camera.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final cameras = await availableCameras();
+  final firstCamera = cameras.first;
+  runApp(MyApp(firstCamera));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final CameraDescription camera;
 
-  // This widget is the root of your application.
+  const MyApp(this.camera, {Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,7 +27,7 @@ class MyApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: const TrashScreen(),
+      home: CameraApp(camera: camera),
     );
   }
 }

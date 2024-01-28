@@ -19,7 +19,7 @@ class CompostScreen extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/recycle.png"),
+                  image: AssetImage("assets/compost.png"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -33,21 +33,21 @@ class CompostScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
             child: Text(
-              "You can help to save the environment by going to this location and recycling the object.",
+              "This material can be composted! By composting, you’re able to promote sustainable agricultural practices and save the environment.",
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(bottom: 32.0),
             child: ElevatedButton(
               onPressed: () {
                 // Handle button press
               },
               child: Text("View Map"),
-              style: ElevatedButton.styleFrom(primary: Colors.blue),
+              style: ElevatedButton.styleFrom(primary: Color.fromARGB(255, 135, 201, 255)),
             ),
           ),
         ],

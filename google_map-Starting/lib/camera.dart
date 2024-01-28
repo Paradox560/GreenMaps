@@ -1,28 +1,82 @@
 import 'package:flutter/material.dart';
-import 'package:tflite_flutter/tflite_flutter.dart';
 import 'package:camera/camera.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Ensure that plugin services are initialized.
+  final cameras = await availableCameras(); // Retrieve the list of available cameras.
 
-class Camera extends StatefulWidget {
-  const Camera({super.key});
+  // Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
 
-  @override
-  State<Camera> createState() => _CameraState();
+  runApp(
+    MaterialApp(
+      theme: ThemeData.dark(),
+      home: CameraApp(
+        camera: firstCamera,
+      ),
+    ),
+  );
 }
 
-class _CameraState extends State<Camera> {
-  Interpreter? interpreter;
+class CameraApp extends StatefulWidget {
+  final CameraDescription camera;
+
+  const CameraApp({
+    Key? key,
+    required this.camera,
+  }) : super(key: key);
+
+  @override
+  _CameraAppState createState() => _CameraAppState();
+}
+
+class _CameraAppState extends State<CameraApp> {
+  late CameraController _controller;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    loadModel();
+    _controller = CameraController(
+      widget.camera,
+      ResolutionPreset.medium,
+    );
+    _initializeCameraController();
   }
-    Future<void> loadModel() async {
-    interpreter = await Interpreter.fromAsset('model.tflite');
+
+  void _initializeCameraController() async {
+    await _controller.initialize();
+    if (!mounted) {
+      return;
+    }
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    if (!_controller.value.isInitialized) {
+      return Container();
+    }
+    return Scaffold(
+      appBar: AppBar(title: Text('Camera Example')),
+      body: CameraPreview(_controller),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.camera),
+        onPressed: () async {
+          try {
+            // Take a picture and save it to the gallery.
+            final image = await _controller.takePicture();
+            print('Image saved to gallery: ${image.path}');
+          } catch (e) {
+            print('Error taking picture: $e');
+          }
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

@@ -18,8 +18,10 @@ class TrashScreen extends StatelessWidget {
           Expanded(
             child: Container(
               decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 1),
                 image: DecorationImage(
-                  image: AssetImage("assets/recycle.png"),
+                  image: AssetImage("assets/trash.png"),
+                  
                   fit: BoxFit.cover,
                 ),
               ),
@@ -28,14 +30,14 @@ class TrashScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              "Recyclable!",
+              "Happy Trashing!",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0, left: 16.0, right: 16.0),
             child: Text(
-              "You can help to save the environment by going to this location and recycling the object.",
+              "This material cannot be safely recycled. Please take care and dispose of this material in a trash can nearby.",
               style: TextStyle(fontSize: 16),
               textAlign: TextAlign.center,
             ),
