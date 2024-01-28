@@ -70,23 +70,6 @@ void navigateToModelPage(BuildContext context, XFile image) {
       return Container();
     }
     return Scaffold(
-<<<<<<< HEAD
-      appBar: AppBar(title: Text('Camera Example')),
-      body: CameraPreview(_controller),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera),
-        onPressed: () async {
-          try {
-            // Take a picture and save it to the gallery.
-            final image = await _controller.takePicture();
-            // go to the model page and pass the image to it
-            navigateToModelPage(context, image);
-            print('Image saved to gallery: ${image.path}');
-          } catch (e) {
-            print('Error taking picture: $e');
-          }
-        },
-=======
       appBar: AppBar(title: Text('Product Disposal Identification')),
       body: Column(
         children: [
@@ -110,7 +93,6 @@ void navigateToModelPage(BuildContext context, XFile image) {
             ),
           ),
         ],
->>>>>>> 870283fc0f44351c3e957b842c3033734138c733
       ),
     );
   }
