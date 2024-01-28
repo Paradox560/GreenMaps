@@ -1,0 +1,9 @@
+name = "greenmaps"
+main = "src/index.js"
+compatibility_date = "2024-01-28"
+account_id = "637f213ac8ba69a0cf3772694a1baa1f"
+workers_dev = true
+
+[[r2_buckets]]
+binding = 'MY_BUCKET' # <~ valid JavaScript variable name
+bucket_name = 'greenmaps'
